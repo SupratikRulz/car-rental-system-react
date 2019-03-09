@@ -1,6 +1,12 @@
 .car-details-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
+}
+
+@media screen and (max-width: 990px) {
+  .car-details-container {
+    justify-content: space-evenly;
+  }
 }
