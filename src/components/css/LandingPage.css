@@ -1,0 +1,23 @@
+.LandingPage {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.dropdown-location {
+  width: 200px !important;
+  margin: 50px;
+  margin-bottom: 0px;
+}
+
+.dropdown-availability {
+  width: 200px !important;
+  margin: 50px;
+  margin-bottom: 0px;
+}
+
+.submit-btn {
+  margin: 50px !important;
+  margin-bottom: 0px !important;
+}
