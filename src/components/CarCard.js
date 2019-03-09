@@ -3,15 +3,16 @@ import {Card, Button} from 'semantic-ui-react';
 import './css/CarCard.css';
 
 function CarCard(props) {
-  const {name, photo, price, seats, transmission, car_Type, fuel_Type, location} = props;
+  const {name, photo, price, seats, transmission, car_Type, fuel_Type, location, unavailable} = props;
   const [selected, setSelectedState] = useState(false);
-  const seletedClass = selected ? ' card-selected': '';
+  const seletedClass = selected ? ' card-selected': '',
+    unavailableClass = unavailable ? ' unavailable' : '';
   return (
       <Card
         image={photo}
         header={name}
         meta={`Price: ₹${price}`}
-        className={'ta-left mw-300 m-40' + seletedClass}
+        className={'ta-left mw-300 m-40' + seletedClass + unavailableClass}
         extra={
           <>
             <span className='label'>Transmission: {transmission}</span>
@@ -22,8 +23,19 @@ function CarCard(props) {
             <br></br>
             <span className='label'>Location: {location}</span>
             <br></br>
-            <Button primary floated='left' className='btn' onClick={() => setSelectedState(!selected)}>{selected ? 'Unseclect' : 'Select'}</Button>
-            <Button primary floated='right' className='btn'>Book Now</Button>
+            {
+              unavailable ? (
+                <>        
+                  <span className={'label red'}>NOT AVAILABLE</span>
+                  <br></br>
+                </>
+              ) : (
+                <>
+                  <Button primary floated='left' className='btn' onClick={() => setSelectedState(!selected)}>{selected ? 'Unseclect' : 'Select'}</Button>
+                  <Button primary floated='right' className='btn'>Book Now</Button>
+                </>
+              )
+            }
           </>
         }
       />

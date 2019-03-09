@@ -32,3 +32,11 @@
 .card-selected {
   border: 1px solid green !important;
 }
+
+.unavailable {
+  border: 1px solid red !important;
+}
+
+.red {
+  color: red;
+}
