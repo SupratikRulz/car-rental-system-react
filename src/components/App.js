@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './css/App.css';
 import Header from './Header';
+import LandingPage from './LandingPage';
 
 class App extends Component {
 
@@ -8,16 +9,26 @@ class App extends Component {
     super();
 
     this.state = {
-      formSubmitted: false
+      locationValues: [],
+      dayValues: [],
+      showCarDetails: false
     };
   }
 
-  render() {
+  updateSearch = (locationValues, dayValues) => {
+    this.setState({
+      locationValues,
+      dayValues,
+      showCarDetails: true
+    });
+  }
 
-    
+  render() {
+    const {locationValues, dayValues, showCarDetails} = this.state;
     return (
       <div className="App">
         <Header />
+        <LandingPage updateSearch={this.updateSearch}/>
       </div>
     );
   }
