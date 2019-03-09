@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CarCard from './CarCard';
+import OptionsSection from './OptionsSection';
 import './css/CarDetailsPage.css';
 export default class CarDetailsPage extends Component {
 
@@ -35,19 +36,19 @@ export default class CarDetailsPage extends Component {
                           }
                           return false;
                         });
-          unavailableCars = cars
-                            .filter(car => locationValues.includes(car.location))
-                            .filter(car => {
-                              let availableDays = car.availability.split(', ');
-                              for (let availableDay of availableDays) {
-                                for (let dayValue of dayValues) {
-                                  if (availableDay === dayValue) {
-                                    return false;
-                                  }
+        unavailableCars = cars
+                          .filter(car => locationValues.includes(car.location))
+                          .filter(car => {
+                            let availableDays = car.availability.split(', ');
+                            for (let availableDay of availableDays) {
+                              for (let dayValue of dayValues) {
+                                if (availableDay === dayValue) {
+                                  return false;
                                 }
                               }
-                              return true;
-                            });
+                            }
+                            return true;
+                          });
         this.setState({
           filteredCars,
           unavailableCars
@@ -59,7 +60,7 @@ export default class CarDetailsPage extends Component {
     const {filteredCars, unavailableCars} = this.state;
     return (
       <>
-        <div> Filter Section </div>
+        <OptionsSection />
         <div className='car-details-container'>
           {filteredCars.map(car => <CarCard {...car}/>)}
           {unavailableCars.map(car => <CarCard {...car} unavailable/>)}
