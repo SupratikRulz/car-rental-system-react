@@ -3,22 +3,22 @@ import {Card} from 'semantic-ui-react';
 import './css/CarCard.css';
 
 function CarCard(props) {
+  const {name, photo, price, seats, transmission, car_Type, fuel_Type, location} = props;
   return (
-
       <Card
-        image='https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1517230618_1500896677_swift.png'
-        header='Mahindra XUV 500T'
-        meta='Price: $100'
-        className='ta-left mw-300'
+        image={photo}
+        header={name}
+        meta={`Price: ₹${price}`}
+        className='ta-left mw-300 m-40'
         extra={
           <>
-            <span className='label'>Transmission: Automatic</span>
+            <span className='label'>Transmission: {transmission}</span>
             <br></br>
-            <span className='label'>Fuel: Petrol</span>
+            <span className='label'>Fuel: {fuel_Type}</span>
             <br></br>
-            <span className='label'>Seats: 10</span>
+            <span className='label'>Seats: {seats}</span>
             <br></br>
-            <span className='label'>Location: Koramangala</span>
+            <span className='label'>Location: {location}</span>
             <br></br>
           </>
         }
