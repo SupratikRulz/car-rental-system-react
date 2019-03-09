@@ -1,0 +1,40 @@
+
+
+.img-container {
+  min-width: 320px;
+  max-width: 600px;
+  min-height: 220px;
+  max-height: 450px;
+  background-image: url('https://jtride-data.s3.ap-south-1.amazonaws.com/uploads/1517230618_1500896677_swift.png');
+  background-size: cover;
+  background-repeat:   no-repeat;
+  background-position: center center; 
+}
+
+.car-details {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.label {
+  width: 100%;
+  padding: 10px;
+}
+
+.ta-left {
+  text-align: left;
+}
+
+.mw-300 {
+  min-width: 300px;
+}
+
+.ui.card:first-child {
+  margin-top: 1em !important;
+}
+
+.ui.card:last-child {
+  margin-bottom: 1em !important;
+}
