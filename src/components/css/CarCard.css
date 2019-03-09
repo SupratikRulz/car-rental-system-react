@@ -24,3 +24,11 @@
 .ui.card:last-child {
   margin-bottom: 1em !important;
 }
+
+.btn {
+  margin-top: 20px !important;
+}
+
+.card-selected {
+  border: 1px solid green !important;
+}
