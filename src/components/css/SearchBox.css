@@ -1,0 +1,22 @@
+.search-box {
+  /* width: 400px; */
+  /* height: 100vh; */
+  margin-right: 0;
+  border-left: 1px solid #7a7a7a;
+  text-align: center;
+}
+
+.input-box {
+  margin-top: 50px;
+  background: url('./../../icons/search.svg') no-repeat scroll 10px 10px;
+  width: 250px;
+  padding-left: 40px;
+  height: 40px;
+  color: whitesmoke;
+  font-size: 15px;
+}
+
+.input-box::placeholder {
+  font-size: 15px;
+  color: #505050;
+}

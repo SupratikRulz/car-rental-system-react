@@ -1,4 +1,4 @@
-.OptionsSection {
+.FilerSection {
   margin: 50px;
   display: flex;
   flex-wrap: wrap;
@@ -6,5 +6,13 @@
 }
 
 .dropdown-filter {
-  width: 200px !important;
+  width: 20% !important;
+  min-width: 200px !important;
+}
+
+@media screen and (max-width: 900px) {
+  .dropdown-filter {
+    width: 90% !important;
+    margin-top: 10px;
+  }
 }
