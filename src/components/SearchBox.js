@@ -11,5 +11,5 @@ export default function SearchBox(props) {
 
 function handleOnChange(event, props) {
   const searchKey = event.target.value.toLowerCase();
-  searchKey && props.filterBySearchKey(searchKey);
+  props.filterBySearchKey(searchKey);
 }

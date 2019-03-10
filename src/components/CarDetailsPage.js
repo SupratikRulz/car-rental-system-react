@@ -11,7 +11,9 @@ export default class CarDetailsPage extends Component {
       cars: [],
       filterLocationDate: [],
       filteredCars: [],
-      unavailableCars: []
+      unavailableCars: [],
+      currentPage: 1,
+      carsPerPage: 6
     }
 
     this.appliedFilters = {
@@ -66,14 +68,41 @@ export default class CarDetailsPage extends Component {
   }
 
   render() {
-    const {filteredCars, unavailableCars} = this.state;
-    const renderElements = [...filteredCars.map(car => <CarCard {...car}/>), ...unavailableCars.map(car => <CarCard {...car} unavailable/>)]
+    const {filteredCars, unavailableCars, currentPage, carsPerPage} = this.state;
+    const lastIndexOfCar = currentPage * carsPerPage;
+    const firstIndexOfCar = lastIndexOfCar - carsPerPage;
+    const totalElements = [...filteredCars.map(car => <CarCard {...car}/>), ...unavailableCars.map(car => <CarCard {...car} unavailable/>)];
+    const renderElements = totalElements.slice(firstIndexOfCar, lastIndexOfCar);
+
+
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(totalElements.length / carsPerPage); i++) {
+      pageNumbers.push(i);
+    }
+
+    const renderPageNumbers = pageNumbers.map(number => {
+      return (
+        <li
+          key={number}
+          id={number}
+          onClick={this.handlePageClick}
+        >
+          {number}
+        </li>
+      );
+    });
     return (
       <>
         <Button primary onClick={this.props.showLandingPage} className='btn-goto'>Goto Previous</Button>
         <OptionsSection applyFilters={this.applyFilters} filterBySearchKey={this.filterBySearchKey} sortByPrice={this.sortByPrice}/>
         <div className='car-details-container'>
           {renderElements}
+        </div>
+        <div>
+          <div>Select to navigate</div>
+          <ul className='page-numbers'>
+            {renderPageNumbers}
+          </ul>
         </div>
       </>
     )
@@ -115,12 +144,21 @@ export default class CarDetailsPage extends Component {
                       return false;
                     })
 
-      this.setState({filteredCars});
+    this.setState({
+      filteredCars,
+      currentPage: 1
+    });
   }
 
   sortByPrice = () => {
     let filteredCars = [...this.state.filteredCars];
       filteredCars = filteredCars.sort((a, b) => a.price - b.price);
       this.setState({filteredCars});
+  }
+
+  handlePageClick = (event) => {
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
   }
 }
