@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CarCard from './CarCard';
 import OptionsSection from './OptionsSection';
 import './css/CarDetailsPage.css';
+import { Button } from 'semantic-ui-react';
 export default class CarDetailsPage extends Component {
 
   constructor() {
@@ -60,12 +61,40 @@ export default class CarDetailsPage extends Component {
     const {filteredCars, unavailableCars} = this.state;
     return (
       <>
-        <OptionsSection />
+        <Button primary onClick={this.props.showLandingPage} className='btn-goto'>Goto Previous</Button>
+        <OptionsSection applyFilters={this.applyFilters}/>
         <div className='car-details-container'>
           {filteredCars.map(car => <CarCard {...car}/>)}
           {unavailableCars.map(car => <CarCard {...car} unavailable/>)}
         </div>
       </>
     )
+  }
+
+
+  applyFilters = (transmission, carTypes, fuelTypes) => {
+    let initialFilteredCars = [...this.state.cars],
+      filteredCars = [];
+    let {locationValues, dayValues} = this.props;
+
+    filteredCars = initialFilteredCars
+                      .filter(car => locationValues.includes(car.location))
+                      .filter(car => {
+                        let availableDays = car.availability.split(', ');
+                        for (let availableDay of availableDays) {
+                          for (let dayValue of dayValues) {
+                            if (availableDay === dayValue) {
+                              return true;
+                            }
+                          }
+                        }
+                        return false;
+                      })
+                      .filter(entry => (transmission.length ? transmission.includes(entry["transmission"]) : true))
+                      .filter(entry => (carTypes.length ? carTypes.includes(entry["car_Type"]) : true))
+                      .filter(entry => (fuelTypes.length ? fuelTypes.includes(entry["fuel_Type"]) : true))
+
+    this.setState({filteredCars})    
+
   }
 }

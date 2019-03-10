@@ -3,12 +3,14 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  align-items: flex-start;
 }
 
 .dropdown-filter {
-  width: 20% !important;
-  min-width: 200px !important;
+  width: 18% !important;
+  min-width: 150px !important;
 }
+
 
 .SearchSection {
   /* margin: 50px; */

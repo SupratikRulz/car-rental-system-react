@@ -24,9 +24,19 @@ class App extends Component {
     });
   }
 
+  showLandingPage = () => {
+    this.setState({
+      locationValues: [],
+      dayValues: [],
+      showCarDetails: false
+    });
+  }
+
   render() {
     const {locationValues, dayValues, showCarDetails} = this.state;
-    let currentPage = showCarDetails ? <CarDetailsPage locationValues={locationValues} dayValues={dayValues}/> : <LandingPage updateSearch={this.updateSearch}/>
+    let currentPage = showCarDetails ? 
+      <CarDetailsPage locationValues={locationValues} dayValues={dayValues} showLandingPage={this.showLandingPage}/>
+      : <LandingPage updateSearch={this.updateSearch}/>
     return (
       <div className="App">
         <Header />

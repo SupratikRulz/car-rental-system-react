@@ -5,6 +5,10 @@
   flex-wrap: wrap;
 }
 
+.btn-goto {
+  margin-top: 20px !important;
+}
+
 @media screen and (max-width: 990px) {
   .car-details-container {
     justify-content: space-evenly;

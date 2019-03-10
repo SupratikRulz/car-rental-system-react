@@ -8,6 +8,8 @@ let locationValues = [],
   dayValues = [];
 
 export default function LandingPage(props) {
+  locationValues = [];
+  dayValues = [];
   return (
     <div className='LandingPage'>
       <Dropdown
