@@ -3,7 +3,7 @@ import {Card, Button} from 'semantic-ui-react';
 import './css/CarCard.css';
 
 function CarCard(props) {
-  const {name, photo, price, seats, transmission, car_Type, fuel_Type, location, unavailable} = props;
+  const {name, photo, price, seats, transmission, fuel_Type, location, unavailable} = props;
   const [selected, setSelectedState] = useState(false);
   const seletedClass = selected ? ' card-selected': '',
     unavailableClass = unavailable ? ' unavailable' : '';

@@ -71,7 +71,7 @@ export default class CarDetailsPage extends Component {
     const {filteredCars, unavailableCars, currentPage, carsPerPage} = this.state;
     const lastIndexOfCar = currentPage * carsPerPage;
     const firstIndexOfCar = lastIndexOfCar - carsPerPage;
-    const totalElements = [...filteredCars.map(car => <CarCard {...car}/>), ...unavailableCars.map(car => <CarCard {...car} unavailable/>)];
+    const totalElements = [...filteredCars.map((car, index) => <CarCard {...car} key={index + car.name}/>), ...unavailableCars.map((car, index) => <CarCard {...car} unavailable key={index + car.name}/>)];
     const renderElements = totalElements.slice(firstIndexOfCar, lastIndexOfCar);
 
 
@@ -98,8 +98,9 @@ export default class CarDetailsPage extends Component {
         <div className='car-details-container'>
           {renderElements}
         </div>
-        <div>
+        <div className='pagination'>
           <div>Select to navigate</div>
+          <p>Current Page: {currentPage}</p>
           <ul className='page-numbers'>
             {renderPageNumbers}
           </ul>

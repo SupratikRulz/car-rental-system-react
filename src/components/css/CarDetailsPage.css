@@ -15,10 +15,15 @@
 }
 
 .page-numbers > li {
-  margin-right: 0.3em;
+  margin-right: 1em;
   color: blue;
   user-select: none;
   cursor: pointer;
+}
+
+.pagination {
+  margin: 50px 50px;
+  font-size: 20px;
 }
 
 @media screen and (max-width: 990px) {
