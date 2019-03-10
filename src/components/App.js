@@ -16,6 +16,14 @@ class App extends Component {
     };
   }
 
+
+  /**
+   * Function to update the state of
+   * locationValues, dayValues and showCarDetails
+   * such that car details page gets displayed with relevant car details
+   * 
+   * @memberOf App
+   */
   updateSearch = (locationValues, dayValues) => {
     this.setState({
       locationValues,
@@ -24,6 +32,13 @@ class App extends Component {
     });
   }
 
+
+  /**
+   * Function to reset the state of
+   * locationValues, dayValues and showCarDetails such that landing page is displayed
+   * 
+   * @memberOf App
+   */
   showLandingPage = () => {
     this.setState({
       locationValues: [],

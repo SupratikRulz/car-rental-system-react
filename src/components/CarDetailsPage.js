@@ -15,7 +15,7 @@ export default class CarDetailsPage extends Component {
       currentPage: 1,
       carsPerPage: 6
     }
-
+    // Holder for the applied filters
     this.appliedFilters = {
       transmission: [],
       carTypes: [],
@@ -25,6 +25,8 @@ export default class CarDetailsPage extends Component {
 
   componentDidMount() {
     let {locationValues, dayValues} = this.props;
+
+    // Fetch the data from the URL and set states of filtered cars, unavailable cars.
     fetch('https://api.sheety.co/311576ae-321a-43e3-9a5b-61b3ac373d85')
       .then(data => data.json())
       .then(cars => {
@@ -74,8 +76,8 @@ export default class CarDetailsPage extends Component {
     const totalElements = [...filteredCars.map((car, index) => <CarCard {...car} key={index + car.name}/>), ...unavailableCars.map((car, index) => <CarCard {...car} unavailable key={index + car.name}/>)];
     const renderElements = totalElements.slice(firstIndexOfCar, lastIndexOfCar);
 
-
-    const pageNumbers = [];
+    // Logic for pagination
+    let pageNumbers = [];
     for (let i = 1; i <= Math.ceil(totalElements.length / carsPerPage); i++) {
       pageNumbers.push(i);
     }
@@ -109,7 +111,12 @@ export default class CarDetailsPage extends Component {
     )
   }
 
-
+  /**
+   * Function to apply filters when apply filter button is pressed
+   * and update the filtered cars
+   * 
+   * @memberOf CarDetailsPage
+   */
   applyFilters = (transmission, carTypes, fuelTypes) => {
     let initialFilteredCars = [...this.state.filterLocationDate],
       filteredCars = [];
@@ -126,6 +133,12 @@ export default class CarDetailsPage extends Component {
     this.setState({filteredCars});
   }
 
+  /**
+   * Function to filter the cars according to the search key
+   * It also resets the pagination to first page
+   * 
+   * @memberOf CarDetailsPage
+   */
   filterBySearchKey = (searchKey) => {
     let initialFilteredCars = [...this.state.filterLocationDate],
       filteredCars = [];
@@ -151,12 +164,23 @@ export default class CarDetailsPage extends Component {
     });
   }
 
+  /**
+   * Function to sort the cars according to the price
+   * 
+   * @memberOf CarDetailsPage
+   */
   sortByPrice = () => {
     let filteredCars = [...this.state.filteredCars];
       filteredCars = filteredCars.sort((a, b) => a.price - b.price);
       this.setState({filteredCars});
   }
 
+  /**
+   * Function to change the current page
+   * when page button is clicked
+   * 
+   * @memberOf CarDetailsPage
+   */
   handlePageClick = (event) => {
     this.setState({
       currentPage: Number(event.target.id)

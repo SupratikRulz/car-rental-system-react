@@ -53,18 +53,41 @@ export default function OptionsSection(props) {
   )
 }
 
+/**
+ * Function to set the transmissionValues
+ * 
+ * @param {any} event - react synthetic event
+ * @param {any} data - state data of the dropdown
+ */
 function setTransmissionValues (event, data) {
   transmissionValues = data.value;
 }
 
+/**
+ * Function to set the carTypeValues
+ * 
+ * @param {any} event - react synthetic event
+ * @param {any} data - state data of the dropdown
+ */
 function setCarTypeValues (event, data) {
   carTypeValues = data.value;
 }
 
+/**
+ * Function to set the fuelTypeValues
+ * 
+ * @param {any} event - react synthetic event
+ * @param {any} data - state data of the dropdown
+ */
 function setFuelTypeValues (event, data) {
   fuelTypeValues = data.value;
 }
 
+/**
+ * Function to apply filters on click of apply button
+ * 
+ * @param {any} props - props passed to the OptionSection component
+ */
 function applyFilters (props) {
   props.applyFilters(transmissionValues, carTypeValues, fuelTypeValues);
 }
