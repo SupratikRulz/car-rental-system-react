@@ -9,8 +9,15 @@ export default class CarDetailsPage extends Component {
     super();
     this.state = {
       cars: [],
+      filterLocationDate: [],
       filteredCars: [],
       unavailableCars: []
+    }
+
+    this.appliedFilters = {
+      transmission: [],
+      carTypes: [],
+      fuelTypes: []
     }
   }
 
@@ -52,20 +59,21 @@ export default class CarDetailsPage extends Component {
                           });
         this.setState({
           filteredCars,
-          unavailableCars
+          unavailableCars,
+          filterLocationDate: filteredCars
         })
       })
   }
 
   render() {
     const {filteredCars, unavailableCars} = this.state;
+    const renderElements = [...filteredCars.map(car => <CarCard {...car}/>), ...unavailableCars.map(car => <CarCard {...car} unavailable/>)]
     return (
       <>
         <Button primary onClick={this.props.showLandingPage} className='btn-goto'>Goto Previous</Button>
-        <OptionsSection applyFilters={this.applyFilters}/>
+        <OptionsSection applyFilters={this.applyFilters} filterBySearchKey={this.filterBySearchKey} sortByPrice={this.sortByPrice}/>
         <div className='car-details-container'>
-          {filteredCars.map(car => <CarCard {...car}/>)}
-          {unavailableCars.map(car => <CarCard {...car} unavailable/>)}
+          {renderElements}
         </div>
       </>
     )
@@ -73,28 +81,46 @@ export default class CarDetailsPage extends Component {
 
 
   applyFilters = (transmission, carTypes, fuelTypes) => {
-    let initialFilteredCars = [...this.state.cars],
+    let initialFilteredCars = [...this.state.filterLocationDate],
       filteredCars = [];
-    let {locationValues, dayValues} = this.props;
+
+    this.appliedFilters = {
+      transmission, carTypes, fuelTypes
+    };
 
     filteredCars = initialFilteredCars
-                      .filter(car => locationValues.includes(car.location))
-                      .filter(car => {
-                        let availableDays = car.availability.split(', ');
-                        for (let availableDay of availableDays) {
-                          for (let dayValue of dayValues) {
-                            if (availableDay === dayValue) {
-                              return true;
-                            }
-                          }
-                        }
-                        return false;
-                      })
                       .filter(entry => (transmission.length ? transmission.includes(entry["transmission"]) : true))
                       .filter(entry => (carTypes.length ? carTypes.includes(entry["car_Type"]) : true))
                       .filter(entry => (fuelTypes.length ? fuelTypes.includes(entry["fuel_Type"]) : true))
 
-    this.setState({filteredCars})    
+    this.setState({filteredCars});
+  }
 
+  filterBySearchKey = (searchKey) => {
+    let initialFilteredCars = [...this.state.filterLocationDate],
+      filteredCars = [];
+    const {transmission, carTypes, fuelTypes} = this.appliedFilters;
+
+    filteredCars = initialFilteredCars
+                    .filter(entry => (transmission.length ? transmission.includes(entry["transmission"]) : true))
+                    .filter(entry => (carTypes.length ? carTypes.includes(entry["car_Type"]) : true))
+                    .filter(entry => (fuelTypes.length ? fuelTypes.includes(entry["fuel_Type"]) : true))
+                    .filter(car => {
+                      if (car.name.toLowerCase().includes(searchKey)) {
+                        return true;
+                      }
+                      if (car.car_Type.toLowerCase().includes(searchKey)) {
+                        return true;
+                      }
+                      return false;
+                    })
+
+      this.setState({filteredCars});
+  }
+
+  sortByPrice = () => {
+    let filteredCars = [...this.state.filteredCars];
+      filteredCars = filteredCars.sort((a, b) => a.price - b.price);
+      this.setState({filteredCars});
   }
 }

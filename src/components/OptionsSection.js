@@ -46,8 +46,8 @@ export default function OptionsSection(props) {
         <Button primary className='dropdown-filter btn-apply' onClick={() => applyFilters(props)}>Apply</Button>
       </div>
       <div className='SearchSection'>
-        <div>Sort by: <Button icon='money'></Button></div>
-        <SearchBox />
+        <div>Sort by: <Button icon='money' onClick={props.sortByPrice}></Button></div>
+        <SearchBox filterBySearchKey={props.filterBySearchKey}/>
       </div>
     </>
   )
