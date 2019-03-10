@@ -39,8 +39,11 @@ export default function OptionsSection() {
           options={fuelType}
         />
       </div>
-      <Button icon='money'></Button>
-      <SearchBox />
+      <div className='SearchSection'>
+        <div>Sort by: <Button icon='money'></Button></div>
+        
+        <SearchBox />
+      </div>
     </>
   )
 }
