@@ -1,4 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The project is hosted at [Netlify](https://exploria-car-rental-system.netlify.com/)
+
+## Screenshot
+![Screenshot](/exploria-car-rental-system.png)
 
 ## Available Scripts
 
